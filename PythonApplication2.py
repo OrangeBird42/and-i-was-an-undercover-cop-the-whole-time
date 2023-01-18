@@ -54,19 +54,33 @@ capitalGuess = input("What is the capital of Latvia? ")
 numberOfGuesses = 1
 
 while (capitalGuess != "Riga") and (capitalGuess != "riga"): #While variable is true, or in this case, while capitalGuess is false.
+    if numberOfGuesses > 2:
+        print("You guessed incorrectly three times. Game over.")
+        break
     numberOfGuesses = numberOfGuesses + 1
     capitalGuess = input("Guess again. ")
 
-print("You guessed it. Riga is the capital of Larvia. It took you " + str(numberOfGuesses) + " guesses." )
+if numberOfGuesses <= 2:
+    print("You guessed it. Riga is the capital of Larvia. It took you " + str(numberOfGuesses) + " guesses." )
 
 
 
 print("    ")
 initalSalesGoal = 20000
 multiplier = 100
+offMonth = True
 
 for monthlyGoal in range(1,13): #A for loop is set to run a certian number of times
+    if monthlyGoal == 6 and offMonth:
+        print("No goal for month 6!")
+        continue
     monthlySalesGoal = initalSalesGoal + (monthlyGoal * multiplier)
     print("Your sales goal for the month " + str(monthlyGoal) + " is " + str(monthlySalesGoal))
+    for weeklyGoal in range(1,5):
+        print("Your goal for the week " + str(weeklyGoal) + " is " + str(monthlyGoal/4))
+        
 
 print("Good luck with your goals! :)")
+
+print("   ")
+
