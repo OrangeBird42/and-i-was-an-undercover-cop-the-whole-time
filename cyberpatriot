@@ -1,0 +1,93 @@
+READ THE README FIRST OR ELSE THAT IS A THREAT
+
+FORENSIC QUESTIONS DO THOSE
+
+Go through user list
+
+Lock root user
+  sudo passwd -l root
+ 
+Check sudo privlages:
+    sudo visudo /etc/sudoers
+    Ubuntu does not some with any predefined cmd alias
+    
+    
+    
+Disabling sudo timer (if this doesnt give you points undo it for the love of god)
+    sudo visudo
+    Next to defaults:
+      timestamp_timeout = 0
+      
+      
+      
+Uncomplicated Firewall (UFW)
+  sudo iptables -L
+  sudo ufw status
+  sudo ufw enable
+  sudo ufw status
+  sudo iptables -L
+  For SSH permissions
+       sudo ufw allow 22/tcp
+   For TCP and UDP
+       sudo ufw allow 53
+       
+       
+systemctl
+  sysctl -w net.ipv4.tcp_syncookies=1
+	sysctl -w net.ipv4.ip_forward=0
+	sysctl -w net.ipv4.conf.all.send_redirects=0
+	sysctl -w net.ipv4.conf.default.send_redirects=0
+	sysctl -w net.ipv4.conf.all.accept_redirects=0
+	sysctl -w net.ipv4.conf.default.accept_redirects=0
+	sysctl -w net.ipv4.conf.all.secure_redirects=0
+	sysctl -w net.ipv4.conf.default.secure_redirects=0
+	sysctl -p
+  
+  
+  
+  Password config in age
+    cd to /etc/
+    sudo nano login.defs
+    PASS_MAX_DAYS 	90
+	  PASS_MIN_DAYS 	10
+	  PASS_WARN_AGE 7
+    If there:
+      FAILLOG_ENAB YES
+      LOG_UNKFAIL_ENAB YES
+      SYSLOG_SU_ENAB YES
+      SYSLOG_SG_ENAB YES
+
+    
+  Delete dangerous files:
+    find / -name '*.mp3' -type f -delete
+	  find / -name '*.mov' -type f -delete
+	  find / -name '*.mp4' -type f -delete
+	  find / -name '*.avi' -type f -delete
+  	find / -name '*.mpg' -type f -delete
+	  find / -name '*.mpeg' -type f -delete
+  	find / -name '*.flac' -type f -delete
+	  find / -name '*.m4a' -type f -delete
+   	find / -name '*.flv' -type f -delete  
+	  find / -name '*.ogg' -type f -delete
+	  find /home -name '*.gif' -type f -delete
+	  find /home -name '*.png' -type f -delete
+	  find /home -name '*.jpg' -type f -delete
+	  find /home -name '*.jpeg' -type f -delete
+    
+secure SSH if required
+  edit /etc/ssh/sshd_config
+    LoginGraceTime 60
+    PermitRootLogin no
+    Protocol 2
+    PermitEmptyPasswords no
+    PasswordAuthentication yes
+    X11Fowarding no
+    UsePAM yes
+  	UsePrivilegeSeparation yes
+    
+Secure the /etc/shadow file
+    chmod 640 /etc/shadow
+  
+    
+  
+    
